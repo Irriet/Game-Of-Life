@@ -6,7 +6,21 @@ namespace Game_Of_Life
     {
         static void Main(string[] args)
         {
+            GenerateCells();
             //Making the grid
+           
+            
+            //Is the game over yet
+            /*bool gameOver = false;
+
+            while (gameOver == false)*/
+            //{
+
+                
+            //}
+        }
+        static void GenerateCells()
+        {
             int gridWidth = 40;
             int gridHeight = 20;
             Random cellGenerator = new Random();
