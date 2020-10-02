@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Game_Of_Life
 {
@@ -6,23 +7,18 @@ namespace Game_Of_Life
     {
         static void Main(string[] args)
         {
-            GenerateCells();
-            //Making the grid
+            GenerateStartingCells();
+            //Thread.Sleep(1000);
+            //Console.Clear();
+            
            
             
-            //Is the game over yet
-            /*bool gameOver = false;
-
-            while (gameOver == false)*/
-            //{
-
-                
-            //}
+            
         }
-        static void GenerateCells()
+        static void GenerateStartingCells()
         {
-            int gridWidth = 40;
-            int gridHeight = 20;
+            int gridWidth = 10;
+            int gridHeight = 10;
             Random cellGenerator = new Random();
             int cell;
 
@@ -34,9 +30,9 @@ namespace Game_Of_Life
                 {
                     cell = cellGenerator.Next(0, 2);
                     if (cell == 1)
-                        Console.Write(".");
-                    else
                         Console.Write("o");
+                    else
+                        Console.Write(".");
                 }
             }
         }
