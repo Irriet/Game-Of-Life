@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Diagnostics.Tracing;
+using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 namespace Game_Of_Life
@@ -7,34 +10,53 @@ namespace Game_Of_Life
     {
         static void Main(string[] args)
         {
-            GenerateStartingCells();
-            //Thread.Sleep(1000);
-            //Console.Clear();
-            
-           
-            
-            
-        }
-        static void GenerateStartingCells()
-        {
-            int gridWidth = 10;
             int gridHeight = 10;
-            Random cellGenerator = new Random();
-            int cell;
+            int gridWidth = 10;
 
-            for (int j = 0; j < gridHeight; j++)
+            Cell[,] startingGrid = new Cell[gridHeight, gridWidth];
+            FillStartingGrid(startingGrid);
+
+            foreach (var cell in startingGrid)
             {
-                Console.WriteLine();
+                if (cell.isAlive)
+                    Console.Write("o");
+                else
+                    Console.Write(".");
+            }
 
-                for (int i = 0; i < gridWidth; i++)
+
+
+            Console.WriteLine();
+
+
+        }
+
+        public static Cell CreateRandomCell(int positionX, int positionY)
+        {
+            bool isItAlive;
+            Random aliveness = new Random();
+            int aliveCode = aliveness.Next(0, 2);
+
+            if (aliveCode == 0)
+                isItAlive = false;
+            else
+                isItAlive = true;
+            Cell cell = new Cell(isItAlive, positionX, positionY);
+            return cell;
+        }
+
+        public static void FillStartingGrid(Cell[,] array)
+        {
+            int i;
+            int j;
+            for (i = 0; i < array.GetLength(0); i++)
+            {
+                for (j = 0; j < array.GetLength(1); j++)
                 {
-                    cell = cellGenerator.Next(0, 2);
-                    if (cell == 1)
-                        Console.Write("o");
-                    else
-                        Console.Write(".");
+                    array[i, j] = CreateRandomCell(i, j);
                 }
             }
+            //return array;
         }
     }
 }
