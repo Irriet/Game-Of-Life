@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Game_Of_Life
 {
@@ -19,6 +20,7 @@ namespace Game_Of_Life
                 }
                 Console.WriteLine();
             }
+            Thread.Sleep(1500);
         }
     }
 }
