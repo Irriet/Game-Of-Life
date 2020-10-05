@@ -8,12 +8,16 @@ namespace Game_Of_Life
     {
         public void DisplayCells(Cell[,] grid)
         {
-            foreach (var cell in grid)
+            for (int i = 0; i < grid.GetLength(0); i++)
             {
-                if (cell.isAlive)
-                    Console.Write("o");
-                else
-                    Console.Write(".");
+                for (int j = 0; j < grid.GetLength(1); j++)
+                {
+                    if (grid[i, j].isAlive)
+                        Console.Write("o");
+                    else
+                        Console.Write(".");
+                }
+                Console.WriteLine();
             }
         }
     }

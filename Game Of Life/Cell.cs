@@ -9,6 +9,7 @@ namespace Game_Of_Life
         public bool isAlive;
         public int positionX;
         public int positionY;
+
         public Cell(bool aIsAlive, int aPositionX, int aPositionY) //this is a constructor
         {
             isAlive = aIsAlive;
