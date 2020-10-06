@@ -23,5 +23,8 @@ namespace Game_Of_Life
             Thread.Sleep(1000);
             Console.Clear();
         }
+
+        public void GameOver(bool areCellsAlive)
+
     }
 }
