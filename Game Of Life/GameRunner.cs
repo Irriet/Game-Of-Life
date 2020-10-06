@@ -36,6 +36,7 @@ namespace Game_Of_Life
                     }
                 }
             }
+            writingService.GameOver(areCellsAlive);
         }
 
 

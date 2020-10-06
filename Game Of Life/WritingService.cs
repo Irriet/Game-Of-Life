@@ -25,6 +25,9 @@ namespace Game_Of_Life
         }
 
         public void GameOver(bool areCellsAlive)
-
+        {
+            if (areCellsAlive == false)
+                Console.WriteLine("All cells are dead, the game is over.");
+        }
     }
 }
