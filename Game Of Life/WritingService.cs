@@ -24,6 +24,16 @@ namespace Game_Of_Life
             Console.Clear();
         }
 
+        public void AskForWidth()
+        {
+            Console.WriteLine("Hello, this is the game of life. Please enter your field width: ");
+        }
+
+        public void AskForHeight()
+        {
+            Console.WriteLine("Now enter your field height: ");
+        }
+
         public void GameOver(bool areCellsAlive)
         {
             if (areCellsAlive == false)
