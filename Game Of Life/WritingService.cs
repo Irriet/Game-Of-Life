@@ -20,7 +20,8 @@ namespace Game_Of_Life
                 }
                 Console.WriteLine();
             }
-            Thread.Sleep(1500);
+            Thread.Sleep(1000);
+            Console.Clear();
         }
     }
 }
