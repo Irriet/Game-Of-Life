@@ -11,9 +11,9 @@ namespace Game_Of_Life
         {
             WritingService writingService = new WritingService();
             writingService.AskForWidth();
-            int gridHeight = Convert.ToInt32(Console.ReadLine());
-            writingService.AskForHeight();
             int gridWidth = Convert.ToInt32(Console.ReadLine());
+            writingService.AskForHeight();
+            int gridHeight = Convert.ToInt32(Console.ReadLine());
 
             bool areCellsAlive = true;
 
@@ -22,6 +22,8 @@ namespace Game_Of_Life
 
             
             writingService.DisplayCells(currentGrid);
+
+            int liveCellCount = 0;
 
             while (areCellsAlive)
             {
@@ -39,6 +41,7 @@ namespace Game_Of_Life
                             areCellsAlive = false;
                     }
                 }
+                
             }
             writingService.GameOver(areCellsAlive);
         }

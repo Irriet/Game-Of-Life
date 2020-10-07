@@ -7,6 +7,7 @@ namespace Game_Of_Life
 {
     class WritingService
     {
+        public int numberOfIterations = 0;
         public void DisplayCells(Cell[,] grid)
         {
             for (int i = 0; i < grid.GetLength(0); i++)
@@ -20,7 +21,9 @@ namespace Game_Of_Life
                 }
                 Console.WriteLine();
             }
-            Thread.Sleep(1000);
+            numberOfIterations++;
+            Console.WriteLine($"Grid number: {numberOfIterations}.");
+            Thread.Sleep(2000);
             Console.Clear();
         }
 
