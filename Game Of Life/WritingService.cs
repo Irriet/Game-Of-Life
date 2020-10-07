@@ -8,6 +8,7 @@ namespace Game_Of_Life
     class WritingService
     {
         public int numberOfIterations = 0;
+        public int numberOfLiveCells = 0;
         public void DisplayCells(Cell[,] grid)
         {
             for (int i = 0; i < grid.GetLength(0); i++)
@@ -15,15 +16,19 @@ namespace Game_Of_Life
                 for (int j = 0; j < grid.GetLength(1); j++)
                 {
                     if (grid[i, j].isAlive)
+                    {
                         Console.Write("o");
+                        numberOfLiveCells++;
+                    }
                     else
                         Console.Write(".");
                 }
                 Console.WriteLine();
             }
             numberOfIterations++;
-            Console.WriteLine($"Grid number: {numberOfIterations}.");
+            Console.WriteLine($"Grid number: {numberOfIterations}. \nLive cells: {numberOfLiveCells}.");
             Thread.Sleep(2000);
+            numberOfLiveCells = 0;
             Console.Clear();
         }
 
