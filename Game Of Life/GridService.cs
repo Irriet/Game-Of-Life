@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game_Of_Life.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
@@ -9,11 +10,19 @@ namespace Game_Of_Life
 {
     class GridService
     {
-        public Cell[,] CreateGrid(int gridHeight, int gridWidth)
+        public Grid CreateGrid(int gridHeight, int gridWidth)
         {
-            Cell[,] cellGrid = new Cell[gridHeight, gridWidth];
-            FillStartingGrid(cellGrid);
-            return cellGrid;
+            Grid grid = new Grid(gridHeight, gridWidth);
+            for (int i = 0; i < grid.gridHeight; i++)
+            {
+                for (int j = 0; j < grid.gridWidth; j++)
+                {
+                    grid.cellGrid[i, j] = CreateRandomCell(i, j);
+                    if (grid.cellGrid[i, j].isAlive)
+                        grid.numberOfLiveCells++;
+                }
+            }
+            return grid;
         }
 
         public Cell CreateRandomCell(int positionX, int positionY)
@@ -30,33 +39,21 @@ namespace Game_Of_Life
             return cell;
         }
 
-        private void FillStartingGrid(Cell[,] array)
+        public Grid CreateNextGenGrid(Grid previousGrid)
         {
-            int i;
-            int j;
-            for (i = 0; i < array.GetLength(0); i++)
+            Grid grid = previousGrid;
+            grid.numberOfLiveCells = 0;
+            for (int i = 0; i < grid.gridHeight; i++)
             {
-                for (j = 0; j < array.GetLength(1); j++)
+                for (int j = 0; j < grid.gridWidth; j++)
                 {
-                    array[i, j] = CreateRandomCell(i, j);
+                    grid.cellGrid[i, j] = CreateNextGenCell(previousGrid.cellGrid, i, j);
+                    if (grid.cellGrid[i, j].isAlive)
+                    grid.numberOfLiveCells++;
                 }
             }
-        }
-
-        public Cell[,] CreateNextGenGrid(Cell[,] previousGrid)
-        {
-            Cell[,] cellGrid = previousGrid;
-         
-            int i;
-            int j;
-            for (i = 0; i < cellGrid.GetLength(0); i++)
-            {
-                for (j = 0; j < cellGrid.GetLength(1); j++)
-                {
-                    cellGrid[i, j] = CreateNextGenCell(previousGrid, i, j);
-                }
-            }
-            return cellGrid;
+            grid.numberOfIteration++;
+            return grid;
         }
 
         private Cell CreateNextGenCell(Cell[,] previousGrid, int positionX, int positionY)

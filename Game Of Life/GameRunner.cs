@@ -10,26 +10,21 @@ namespace Game_Of_Life
         public void Run()
         {
             WritingService writingService = new WritingService();
-            writingService.AskForWidth();
-            int gridWidth = Convert.ToInt32(Console.ReadLine());
-            writingService.AskForHeight();
-            int gridHeight = Convert.ToInt32(Console.ReadLine());
-
-            bool areCellsAlive = true;
+            int gridWidth = writingService.GetWidth();
+            int gridHeight = writingService.GetHeight();
 
             GridService gridService = new GridService();
             var currentGrid = gridService.CreateGrid(gridHeight, gridWidth);
 
-            
-            writingService.DisplayCells(currentGrid);
+            writingService.DisplayGrid(currentGrid);
 
-            while (areCellsAlive)
+            while (currentGrid.numberOfLiveCells > 0)
             {
                 var nextGrid = gridService.CreateNextGenGrid(currentGrid);
-                writingService.DisplayCells(nextGrid);
+                writingService.DisplayGrid(nextGrid);
                 currentGrid = nextGrid;
             }
-            writingService.GameOver(areCellsAlive);
+            writingService.GameOver();
         }
 
 
