@@ -23,7 +23,7 @@ namespace Game_Of_Life
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine($"Grid number: {grid.numberOfIteration}. \nLive cells: {grid.numberOfLiveCells}.");
+            Console.WriteLine($"\nGrid number: {grid.numberOfIteration}. \nLive cells: {grid.numberOfLiveCells}. \n\nPress ESC to stop.");
             Thread.Sleep(2000);
             Console.Clear();
         }
