@@ -42,7 +42,7 @@ namespace Game_Of_Life
 
         public void GameOver()
         {
-            Console.WriteLine("All cells are dead, the game is over.");
+            Console.WriteLine("The game is over.");
         }
     }
 }

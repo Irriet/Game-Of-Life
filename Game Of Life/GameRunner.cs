@@ -18,12 +18,17 @@ namespace Game_Of_Life
 
             writingService.DisplayGrid(currentGrid);
 
-            while (currentGrid.numberOfLiveCells > 0)
+            do
             {
-                var nextGrid = gridService.CreateNextGenGrid(currentGrid);
-                writingService.DisplayGrid(nextGrid);
-                currentGrid = nextGrid;
+                while (currentGrid.numberOfLiveCells > 0 && !Console.KeyAvailable)
+                {
+                    var nextGrid = gridService.CreateNextGenGrid(currentGrid);
+                    writingService.DisplayGrid(nextGrid);
+                    currentGrid = nextGrid;
+                }
             }
+            while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+
             writingService.GameOver();
         }
 
