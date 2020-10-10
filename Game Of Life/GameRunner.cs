@@ -9,6 +9,26 @@ namespace Game_Of_Life
     {
         public void Run()
         {
+            
+            WritingService writingService = new WritingService();
+            int menuChoice = writingService.StartingMenu();
+
+            if (menuChoice == 1) //run game
+            {
+                RunTheGame();
+            }
+            else if (menuChoice == 2) //load save
+            {
+
+            }
+            else if (menuChoice == 3) //exit
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        public void RunTheGame()
+        {
             WritingService writingService = new WritingService();
             int gridWidth = writingService.GetWidth();
             int gridHeight = writingService.GetHeight();
@@ -29,9 +49,18 @@ namespace Game_Of_Life
             }
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
-            writingService.GameOver();
-        }
+            string createSave = writingService.GameOver();
+            if (createSave == "y" || createSave == "Y")
+            {
+                Environment.Exit(0);
+            }
+            else if (createSave == "n" || createSave == "N")
+            {
+                Environment.Exit(0);
+            }
 
+
+        }
 
 
 

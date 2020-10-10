@@ -30,7 +30,7 @@ namespace Game_Of_Life
 
         public int GetWidth()
         {
-            Console.WriteLine("Hello, this is the game of life. Please enter your field width: ");
+            Console.WriteLine("Please enter your field width: ");
             return Convert.ToInt32(Console.ReadLine());
         }
 
@@ -40,9 +40,16 @@ namespace Game_Of_Life
             return Convert.ToInt32(Console.ReadLine());
         }
 
-        public void GameOver()
+        public string GameOver()
         {
-            Console.WriteLine("The game is over.");
+            Console.WriteLine("The game is over. Do you wish to save? \nPress Y for yes, N for no, confirm with Enter.");
+            return Console.ReadLine();
+        }
+
+        public int StartingMenu()
+        {
+            Console.WriteLine("Hello, this is the game of life. Press a number and confirm with Enter to select one of the options below. \n1) Run the game \n2) Load a save \n3) Exit");
+            return Convert.ToInt32(Console.ReadLine());
         }
     }
 }
