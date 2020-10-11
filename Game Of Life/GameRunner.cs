@@ -52,11 +52,16 @@ namespace Game_Of_Life
             string createSave = writingService.GameOver();
             if (createSave == "y" || createSave == "Y")
             {
-                Environment.Exit(0);
+                Saves saves = new Saves();
+                saves.SaveToFile(currentGrid);
+                Console.Clear();
+                Run();
+
             }
             else if (createSave == "n" || createSave == "N")
             {
-                Environment.Exit(0);
+                Console.Clear();
+                Run();
             }
 
 
