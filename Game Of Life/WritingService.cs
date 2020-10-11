@@ -51,5 +51,10 @@ namespace Game_Of_Life
             Console.WriteLine("Hello, this is the game of life. Press a number and confirm with Enter to select one of the options below. \n1) Run the game \n2) Load a save \n3) Exit");
             return Convert.ToInt32(Console.ReadLine());
         }
+
+        public void GameWasSaved()
+        {
+            Console.WriteLine("The game has been saved.\n");
+        }
     }
 }

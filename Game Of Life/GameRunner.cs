@@ -7,35 +7,33 @@ namespace Game_Of_Life
 {
     class GameRunner
     {
+        Saves saves = new Saves();
+        WritingService writingService = new WritingService();
         public void Run()
         {
             
-            WritingService writingService = new WritingService();
             int menuChoice = writingService.StartingMenu();
 
             if (menuChoice == 1) //run game
             {
-                RunTheGame();
+                RunGame();
             }
             else if (menuChoice == 2) //load save
             {
-
+                saves.RunSave();
             }
             else if (menuChoice == 3) //exit
             {
                 Environment.Exit(0);
             }
         }
-
-        public void RunTheGame()
+        public void RunGame()
         {
-            WritingService writingService = new WritingService();
             int gridWidth = writingService.GetWidth();
             int gridHeight = writingService.GetHeight();
 
             GridService gridService = new GridService();
             var currentGrid = gridService.CreateGrid(gridHeight, gridWidth);
-
             writingService.DisplayGrid(currentGrid);
 
             do
@@ -48,25 +46,13 @@ namespace Game_Of_Life
                 }
             }
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
-
-            string createSave = writingService.GameOver();
-            if (createSave == "y" || createSave == "Y")
-            {
-                Saves saves = new Saves();
-                saves.SaveToFile(currentGrid);
-                Console.Clear();
-                Run();
-
-            }
-            else if (createSave == "n" || createSave == "N")
-            {
-                Console.Clear();
-                Run();
-            }
+            saves.PostGameSaving(currentGrid);
+            Run();
 
 
+
+            
         }
-
 
 
 
