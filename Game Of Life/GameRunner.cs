@@ -2,40 +2,25 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using Game_Of_Life.Data;
 
 namespace Game_Of_Life
 {
     class GameRunner
     {
-        Saves saves = new Saves();
-        WritingService writingService = new WritingService();
-        public void Run()
-        {
-            
-            int menuChoice = writingService.StartingMenu();
+        readonly GridService gridService = new GridService();
+        readonly FileService fileService = new FileService();
+        readonly WritingService writingService = new WritingService();
 
-            if (menuChoice == 1) //run game
-            {
-                RunGame();
-            }
-            else if (menuChoice == 2) //load save
-            {
-                saves.RunSave();
-            }
-            else if (menuChoice == 3) //exit
-            {
-                Environment.Exit(0);
-            }
-        }
-        public void RunGame()
+        public Data.Grid CreateGame()
         {
             int gridWidth = writingService.GetWidth();
             int gridHeight = writingService.GetHeight();
-
-            GridService gridService = new GridService();
-            var currentGrid = gridService.CreateGrid(gridHeight, gridWidth);
+            return gridService.CreateGrid(gridHeight, gridWidth);
+        }
+        public void RunGame(Data.Grid currentGrid)
+        {
             writingService.DisplayGrid(currentGrid);
-
             do
             {
                 while (currentGrid.numberOfLiveCells > 0 && !Console.KeyAvailable)
@@ -46,18 +31,7 @@ namespace Game_Of_Life
                 }
             }
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
-            saves.PostGameSaving(currentGrid);
-            Run();
-
-
-
-            
+            fileService.PostGameSaving(currentGrid);  
         }
-
-
-
-
-
-
     }
 }

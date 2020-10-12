@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Game_Of_Life.Data;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,9 +10,11 @@ using System.Text;
 
 namespace Game_Of_Life
 {
-    class Saves
+    class FileService
     {
         WritingService writingService = new WritingService();
+        string savePath = @$"{Environment.CurrentDirectory}\Saves";
+
         private string GetFileName()
         {
             DateTime date = DateTime.Now;
@@ -19,12 +23,12 @@ namespace Game_Of_Life
             string fileName = dateNow + " " + timeNow;
             return fileName;
         }
-        public void PostGameSaving(Data.Grid currentGrid)
+        public void PostGameSaving(Grid currentGrid)
         {
             string createSave = writingService.GameOver();
             if (createSave == "y" || createSave == "Y")
             {
-                Saves saves = new Saves();
+                FileService saves = new FileService();
                 saves.SaveToFile(currentGrid);
                 Console.Clear();
                 writingService.GameWasSaved();
@@ -34,13 +38,11 @@ namespace Game_Of_Life
                 Console.Clear();
             }
         }
-
-
-        public void SaveToFile(Data.Grid currentGrid)
+        private void SaveToFile(Grid currentGrid)
         {
             string fileName = GetFileName();
             string jsonConvert = JsonConvert.SerializeObject(currentGrid);
-            string path = $@"C:\Users\Irriet\Desktop\C#\Game Of Life\Saves\{fileName}.json";
+            string path = $@"{savePath}\{fileName}.json";
 
             using (StreamWriter streamWriter = new StreamWriter(path, true))
             {
@@ -48,9 +50,14 @@ namespace Game_Of_Life
                 streamWriter.Close();
             }
         }
-        public void RunSave()
+        public string[] GetFilePaths()
         {
-
+            return Directory.GetFiles(savePath);
+        }
+        //TODO implement 
+        public Grid LoadGrid(string filePath)
+        {
+            return new Grid(10, 10);
         }
 
 

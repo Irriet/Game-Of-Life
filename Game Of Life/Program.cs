@@ -10,8 +10,8 @@ namespace Game_Of_Life
     {
         static void Main(string[] args)
         {
-            GameRunner gameRunner = new GameRunner();
-            gameRunner.Run();
+            Menu menu = new Menu();
+            menu.Run();
         }
 
        

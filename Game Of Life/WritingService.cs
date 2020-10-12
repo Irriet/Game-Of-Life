@@ -46,6 +46,7 @@ namespace Game_Of_Life
             return Console.ReadLine();
         }
 
+        //TO DO: limit input possibilities
         public int StartingMenu()
         {
             Console.WriteLine("Hello, this is the game of life. Press a number and confirm with Enter to select one of the options below. \n1) Run the game \n2) Load a save \n3) Exit");
@@ -56,5 +57,21 @@ namespace Game_Of_Life
         {
             Console.WriteLine("The game has been saved.\n");
         }
+
+        //TO DO: limit input possibilities
+        public string SelectGame(string[] savePaths)
+        {
+            int choice;
+            for (int i = 0; i < savePaths.Length; i++)
+            {
+                string path = savePaths[i];
+                Console.WriteLine($"{i}. {System.IO.Path.GetFileName(path)}");
+            }
+            Console.WriteLine("Enter a number of save file that you want to load: ");
+            choice = Convert.ToInt32(Console.ReadLine());
+            return savePaths[choice];
+
+        }
+
     }
 }
