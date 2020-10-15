@@ -31,7 +31,7 @@ namespace Game_Of_Life
                 }
             }
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
-            fileService.PostGameSaving(currentGrid);  
+            fileService.PostGameSaving(currentGrid);
         }
     }
 }

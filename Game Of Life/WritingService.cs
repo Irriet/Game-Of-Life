@@ -24,22 +24,22 @@ namespace Game_Of_Life
                 Console.WriteLine();
             }
             Console.WriteLine($"\nGrid number: {grid.numberOfIteration}. \nLive cells: {grid.numberOfLiveCells}. \n\nPress ESC to stop.");
-            Thread.Sleep(2000);
+            Thread.Sleep(500);
             Console.Clear();
         }
-
+        //TO DO: limit input possibilities
         public int GetWidth()
         {
             Console.WriteLine("Please enter your field width: ");
             return Convert.ToInt32(Console.ReadLine());
         }
-
+        //TO DO: limit input possibilities
         public int GetHeight()
         {
             Console.WriteLine("Now enter your field height: ");
             return Convert.ToInt32(Console.ReadLine());
         }
-
+        //TO DO: limit input possibilities
         public string GameOver()
         {
             Console.WriteLine("The game is over. Do you wish to save? \nPress Y for yes, N for no, confirm with Enter.");
@@ -61,6 +61,7 @@ namespace Game_Of_Life
         //TO DO: limit input possibilities
         public string SelectGame(string[] savePaths)
         {
+            Console.Clear();
             int choice;
             for (int i = 0; i < savePaths.Length; i++)
             {
@@ -70,7 +71,6 @@ namespace Game_Of_Life
             Console.WriteLine("Enter a number of save file that you want to load: ");
             choice = Convert.ToInt32(Console.ReadLine());
             return savePaths[choice];
-
         }
 
     }

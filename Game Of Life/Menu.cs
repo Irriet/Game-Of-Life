@@ -8,9 +8,9 @@ namespace Game_Of_Life
 {
     class Menu
     {
-        WritingService writingService = new WritingService();
-        FileService fileService = new FileService();
-        GameRunner gameRunner = new GameRunner();
+        readonly WritingService writingService = new WritingService();
+        readonly FileService fileService = new FileService();
+        readonly GameRunner gameRunner = new GameRunner();
         public void Run()
         {
             int menuChoice = writingService.StartingMenu();
@@ -19,6 +19,7 @@ namespace Game_Of_Life
             {
                 var currentGrid = gameRunner.CreateGame();
                 gameRunner.RunGame(currentGrid);
+                Run();
             }
             else if (menuChoice == 2)
             {
@@ -26,6 +27,7 @@ namespace Game_Of_Life
                 var filePath = writingService.SelectGame(filePaths);
                 Grid grid = fileService.LoadGrid(filePath);
                 gameRunner.RunGame(grid);
+                Run();
             }
             else if (menuChoice == 3) //exit
             {

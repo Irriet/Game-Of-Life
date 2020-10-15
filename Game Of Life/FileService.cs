@@ -12,8 +12,8 @@ namespace Game_Of_Life
 {
     class FileService
     {
-        WritingService writingService = new WritingService();
-        string savePath = @$"{Environment.CurrentDirectory}\Saves";
+       readonly WritingService writingService = new WritingService();
+        readonly string savePath = @$"{Environment.CurrentDirectory}/Saves";
 
         private string GetFileName()
         {
@@ -28,8 +28,7 @@ namespace Game_Of_Life
             string createSave = writingService.GameOver();
             if (createSave == "y" || createSave == "Y")
             {
-                FileService saves = new FileService();
-                saves.SaveToFile(currentGrid);
+                SaveToFile(currentGrid);
                 Console.Clear();
                 writingService.GameWasSaved();
             }
@@ -42,13 +41,11 @@ namespace Game_Of_Life
         {
             string fileName = GetFileName();
             string jsonConvert = JsonConvert.SerializeObject(currentGrid);
-            string path = $@"{savePath}\{fileName}.json";
+            string path = $@"{savePath}/{fileName}.json";
 
-            using (StreamWriter streamWriter = new StreamWriter(path, true))
-            {
-                streamWriter.Write(jsonConvert.ToString());
-                streamWriter.Close();
-            }
+            using StreamWriter streamWriter = new StreamWriter(path, true);
+            streamWriter.Write(jsonConvert.ToString());
+            streamWriter.Close();
         }
         public string[] GetFilePaths()
         {
@@ -57,7 +54,10 @@ namespace Game_Of_Life
         //TODO implement 
         public Grid LoadGrid(string filePath)
         {
-            return new Grid(10, 10);
+            string json = File.ReadAllText(filePath);
+            Grid grid;
+            grid = JsonConvert.DeserializeObject<Grid>(json);
+            return grid;
         }
 
 
