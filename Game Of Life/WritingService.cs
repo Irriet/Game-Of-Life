@@ -62,15 +62,29 @@ namespace Game_Of_Life
         public string SelectGame(string[] savePaths)
         {
             Console.Clear();
-            int choice;
-            for (int i = 0; i < savePaths.Length; i++)
+            int i;
+            int num;
+            //display the saves:
+            for (i = 0; i < savePaths.Length; i++)
             {
                 string path = savePaths[i];
                 Console.WriteLine($"{i}. {System.IO.Path.GetFileName(path)}");
             }
+
+            //ask for input:
             Console.WriteLine("Enter a number of save file that you want to load: ");
-            choice = Convert.ToInt32(Console.ReadLine());
-            return savePaths[choice];
+            var choice = Console.ReadLine();
+            while (!int.TryParse(choice, out num))
+            {
+                Console.WriteLine("Choice must be a number. Input a valid number.");
+                choice = Console.ReadLine();
+            }
+            while (num >= i)
+            {
+                Console.WriteLine("There's no save with such a number. Input a valid number.");
+                num = Convert.ToInt32(Console.ReadLine());
+            }
+            return savePaths[num];
         }
 
     }
