@@ -10,7 +10,7 @@ namespace Game_Of_Life
 {
     class GridService
     {
-        CellService cellService = new CellService();
+        readonly CellService cellService = new CellService();
 
         public Grid CreateGrid(int gridHeight, int gridWidth)
         {

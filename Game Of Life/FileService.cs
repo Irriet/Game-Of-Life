@@ -35,6 +35,7 @@ namespace Game_Of_Life
             else if (createSave == "n" || createSave == "N")
             {
                 Console.Clear();
+                writingService.GameNotSaved();
             }
         }
         private void SaveToFile(Grid currentGrid)
@@ -51,7 +52,7 @@ namespace Game_Of_Life
         {
             return Directory.GetFiles(savePath);
         }
-        //TODO implement 
+
         public Grid LoadGrid(string filePath)
         {
             string json = File.ReadAllText(filePath);
