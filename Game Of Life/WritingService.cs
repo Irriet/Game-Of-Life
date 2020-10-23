@@ -1,6 +1,7 @@
 ﻿using Game_Of_Life.Data;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 
@@ -8,6 +9,8 @@ namespace Game_Of_Life
 {
     class WritingService
     {
+        private readonly int minGridSize = 5;
+        private readonly int maxGridSize = 50;
         public void DisplayGrid(Grid grid)
         {
             for (int i = 0; i < grid.gridHeight; i++)
@@ -27,31 +30,30 @@ namespace Game_Of_Life
             Thread.Sleep(100);
             Console.Clear();
         }
-        //TO DO: limit input possibilities
+
         public int GetWidth()
         {
-            Console.WriteLine("Please enter your field width (5-500): ");
+            Console.WriteLine($"Please enter your field width ({minGridSize}-{maxGridSize}): ");
             var width = Console.ReadLine();
             int widthInt;
-            while (!int.TryParse(width, out widthInt) || widthInt > 500 || widthInt < 5 || string.IsNullOrEmpty(width))
+            while (!int.TryParse(width, out widthInt) || widthInt > maxGridSize || widthInt < minGridSize || string.IsNullOrEmpty(width))
             {
-                Console.WriteLine("Height must be a number between 5 and 500.");
+                Console.WriteLine($"Width must be a number between {minGridSize} and {maxGridSize}.");
                 width = Console.ReadLine();
             }
-            return Convert.ToInt32(widthInt);
+            return widthInt;
         }
-        //TO DO: limit input possibilities
+
         public int GetHeight()
         {
-            Console.WriteLine("Now enter your field height (5-500): ");
+            Console.WriteLine($"Now enter your field height ({minGridSize}-{maxGridSize}): ");
             var height = Console.ReadLine();
             int heightInt;
-            while (!int.TryParse(height, out heightInt) || heightInt > 500 || heightInt < 5 || string.IsNullOrEmpty(height))
+            while (!int.TryParse(height, out heightInt) || heightInt > maxGridSize || heightInt < minGridSize || string.IsNullOrEmpty(height))
             {
-                Console.WriteLine("Height must be a number between 5 and 500.");
+                Console.WriteLine($"Height must be a number between {minGridSize} and {maxGridSize}.");
                 height = Console.ReadLine();
             }
-
             return heightInt;
         }
 
